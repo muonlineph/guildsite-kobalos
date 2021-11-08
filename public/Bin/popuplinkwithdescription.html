@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Pop-up Link with Description</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+<!-- Begin
+//   ##############  SIMPLE  BROWSER SNIFFER
+if (document.layers) {navigator.family = "nn4"}
+if (document.all) {navigator.family = "ie4"}
+if (window.navigator.userAgent.toLowerCase().match("gecko")) {navigator.family = "gecko"}
+
+//  #########  popup text 
+descarray = new Array(
+"This site has some of the greatest scripts around!",
+"These popups can have varying width. It is dependant upon the text message.",
+"You can have <b>two</b> lines <br>and HTML content.",
+"You can also have images in here like this:<br><img src=greenbar.gif>",
+"You can put in a really long <br>description if it is nessary to <br>explain something in detail, <br>like a warning about content <br>or privacy.",
+"</center>Lastly, you can have links like these:<br><a href='http://javascript.internet.com/'>JavaScript Source</a><br><a href='http://javascript.internet.com/'>JavaScript Source</a><br><a href='http://javascript.internet.com/'>JavaScript Source</a><br>With a change in the onmouseout event handler."
+);
+
+overdiv="0";
+//  #########  CREATES POP UP BOXES 
+function popLayer(a){
+if(!descarray[a]){descarray[a]="<font color=red>This popup (#"+a+") isn't setup correctly - needs description</font>";}
+if (navigator.family == "gecko") {pad="0"; bord="1 bordercolor=black";}
+else {pad="1"; bord="0";}
+desc = 	  "<table cellspacing=0 cellpadding="+pad+" border="+bord+"  bgcolor=000000><tr><td>\n"
+	+"<table cellspacing=0 cellpadding=3 border=0 width=100%><tr><td bgcolor=ffffdd><center><font size=-1>\n"
+	+descarray[a]
+	+"\n</td></tr></table>\n"
+	+"</td></tr></table>";
+if(navigator.family =="nn4") {
+	document.object1.document.write(desc);
+	document.object1.document.close();
+	document.object1.left=x+15;
+	document.object1.top=y-5;
+	}
+else if(navigator.family =="ie4"){
+	object1.innerHTML=desc;
+	object1.style.pixelLeft=x+15;
+	object1.style.pixelTop=y-5;
+	}
+else if(navigator.family =="gecko"){
+	document.getElementById("object1").innerHTML=desc;
+	document.getElementById("object1").style.left=x+15;
+	document.getElementById("object1").style.top=y-5;
+	}
+}
+function hideLayer(){
+if (overdiv == "0") {
+	if(navigator.family =="nn4") {eval(document.object1.top="-500");}
+	else if(navigator.family =="ie4"){object1.innerHTML="";}
+	else if(navigator.family =="gecko") {document.getElementById("object1").style.top="-500";}
+	}
+}
+
+//  ########  TRACKS MOUSE POSITION FOR POPUP PLACEMENT
+var isNav = (navigator.appName.indexOf("Netscape") !=-1);
+function handlerMM(e){
+x = (isNav) ? e.pageX : event.clientX + document.body.scrollLeft;
+y = (isNav) ? e.pageY : event.clientY + document.body.scrollTop;
+}
+if (isNav){document.captureEvents(Event.MOUSEMOVE);}
+document.onmousemove = handlerMM;
+//  End -->
+</script>
+
+
+</head>
+<body>
+
+<div id="object1" style="position:absolute; background-color:FFFFDD;color:black;border-color:black;border-width:20; visibility:show; left:25px; top:-100px; z-index:+1" onmouseover="overdiv=1;"  onmouseout="overdiv=0; setTimeout('hideLayer()',1000)">
+pop up description layer
+</div>
+
+<!--  THE TEXT FOR THE POPUP DESCRIPTIONS ARE ON LINE 12  -->
+
+<a href="http://javascript.internet.com" onMouseOver="popLayer(0)" onMouseOut="hideLayer()"><font size=-1 face=arial><b>
+THE JavaScript Source
+	</b></font></a><br>
+
+<a href="#" onMouseOver="popLayer(1)" onMouseOut="hideLayer()"><font size=-1 face=arial><b>
+Variable width
+	</b></font></a><br>
+
+<a href="#" onMouseOver="popLayer(2)" onMouseOut="hideLayer()"><font size=-1 face=arial><b>
+Double line popup
+	</b></font></a><br>
+
+<a href="#" onMouseOver="popLayer(3)" onMouseOut="hideLayer()"><font size=-1 face=arial><b>
+Image sample
+	</b></font></a><br>
+
+<a href="#" onMouseOver="popLayer(4)" onMouseOut="hideLayer()"><font size=-1 face=arial><b>
+Really long description
+	</b></font></a><br>
+
+<a href="#" onMouseOver="popLayer(5)" onMouseOut="setTimeout('hideLayer()',2000)"><font size=-1 face=arial><b>
+Persistant with links
+	</b></fon
+
+
+
+</html>

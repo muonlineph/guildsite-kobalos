@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>Text Typer</title>
+
+<!-- ******************** -->
+<!-- STYLE FOR TICKER TEXT -->
+<style content="text/css">
+body  {border:0;margin:0;overflow:hidden;background-color:transparent}
+ .ticker{font-size:12;color:#FFCC33;font-family:verdana;cursor:default;}
+</style>
+
+<script language="JavaScript">
+<!--
+
+//**************//
+// USER SETTINGS//
+
+var speed = 50;                   // scroller speed
+var msg_delay = 3000;             // delay between messages
+var msg = new Array()
+msg[0] = 'Welcome to the Text Typer.';
+msg[1] = '<br><br>Featuring:';
+msg[2] = '<br>. A moving/blinking cursor';
+msg[3] = '<br>. Completely costomizable.';
+msg[4] = '<br>. Supports ALL HTML tags including images and links.';
+msg[5] = '<br>. Unlimited number of messages.';
+msg[6] = '<br>. Variable timings for different areas of message.<br>';
+var cursor_color = '#FFFF00'
+var ticker_top = 80
+var ticker_left = 80
+
+//**************//
+
+var pics = new Array()
+pics[0] = ''
+var temp = "";
+var temp2 = "";
+var count = 0;
+var count2 = 1;
+var count3 = 0;
+var tag = 0;
+
+
+function set_scroller()
+ {
+  document.all.scroll_holder.style.top   = ticker_top; 
+  document.all.scroll_holder.style.left  = ticker_left; 
+  scroller();
+ }
+
+
+function scroller()
+ {
+  switch (count3) // change timings for different parts of message
+  {
+   case 0:   msg_delay = 3000; break
+   case 2:   msg_delay = 200;  break
+   case 7:   msg_delay = 3000; break
+  }  
+  if (count3 < msg.length)
+   {   
+	if (count2 < msg[count3].length + 1)
+     {
+      temp = msg[count3].substring(count,count2);
+	  temp2+=temp;
+      count++;
+	  count2++;
+	  if(temp=="<"||temp==">")status = temp
+      document.all.scroller.innerHTML = temp2 + "<font color='"+cursor_color+"'>_</font>";
+      setTimeout('scroller();',speed);
+     } 
+	else
+	 {
+      document.all.scroller.innerHTML = temp2 + "<font color='"+cursor_color+"'><blink>_</blink></font>";
+	  count = 0;
+	  count2 = 1;
+	  count3++;
+	  setTimeout('scroller();',msg_delay);
+	 }
+   }
+  else
+   {
+    count = 0;
+	count2 = 1;
+	temp2 = ""; // reset the entire message
+	count3 = 0;
+	setTimeout('scroller();',msg_delay);    
+   }
+ }
+
+function doBlink() 
+ {
+  // Blink, Blink, Blink...
+  var blink = document.all.tags("BLINK")
+  for (var i=0; i < blink.length; i++)
+    blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "" 
+ }
+
+
+//-->
+</script>
+
+
+</head>
+<body onload='set_scroller();setInterval("doBlink()",500)'>
+
+
+<table id="scroll_holder" style="position:absolute; height:0; width:0;" class="ticker">
+ <td id="scroller" align="left">
+ </td>
+</table>
+
+
+</body>
+</html>

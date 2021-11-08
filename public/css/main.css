@@ -1,0 +1,49 @@
+body {
+	font-family: sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: white;
+/*	background-color:#fcfcfd;*/
+	text-align: justify;
+	margin: 0px;
+	background-color:black;
+	background-image: url();
+	background-repeat: y;
+	background-position: center top;
+}
+
+TD.mainBg {
+	BACKGROUND-IMAGE: url(background_main_haste1.JPG); BACKGROUND-REPEAT: repeat-y;
+	PADDING-RIGHT: 20px; 
+	PADDING-LEFT: 20px; 
+	FONT-SIZE: 66.5%; 
+	PADDING-BOTTOM: 20px; 
+	MARGIN: 20px; 
+	COLOR: white; 
+	PADDING-TOP: 5px; 
+	FONT-FAMILY: tahoma, verdana, arial, sans-serif; 
+	TEXT-ALIGN: center;
+}
+
+A:link {
+	COLOR: lightsteelblue; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #999999; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: lightslategray; TEXT-DECORATION: none
+}
+A IMG {
+	BORDER-RIGHT: #2d3239 3px solid; 
+	BORDER-TOP: #2d3239 3px solid; 
+	BORDER-LEFT: #2d3239 3px solid; 
+	BORDER-BOTTOM: #2d3239 3px solid
+}
+
+A:hover IMG {
+	BORDER-RIGHT: #5a626f 3px solid; 
+	BORDER-TOP: #5a626f 3px solid; 
+	BORDER-LEFT: #5a626f 3px solid; 
+	BORDER-BOTTOM: #5a626f 3px solid
+}

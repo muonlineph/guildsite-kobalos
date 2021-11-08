@@ -1,0 +1,158 @@
+/**
+* Main CSS
+* PC World
+*/
+
+
+TD.mainHeader {
+	/* BACKGROUND-IMAGE: url(kobalos_banner.jpg); BACKGROUND-REPEAT: repeat-y */
+	BACKGROUND-IMAGE: url(../images/kobalos_banner1.gif); BACKGROUND-REPEAT: repeat-y
+}
+TD.sideBg {
+	BACKGROUND-IMAGE: url(../images/side-black.jpg); BACKGROUND-REPEAT: repeat-x
+}
+TD.leftBg {
+	BACKGROUND-IMAGE: url(../images/rechts_bg2.gif); BACKGROUND-REPEAT: ;
+}
+TD.footer {
+	BACKGROUND-IMAGE: url(../images/footer-png2b.png); BACKGROUND-REPEAT: ;
+	FONT-SIZE: 10px; 
+	COLOR: lightsteelblue; 
+	padding-bottom: 6px;
+	FONT-FAMILY: tahoma, verdana, arial, sans-serif; 
+	FONT-WEIGHT: ;
+	TEXT-ALIGN: left;
+}
+
+.emblem
+{
+	width: 90px;	
+	height: 68px;
+	float: center;
+	margin-left: 40px;
+	BACKGROUND-IMAGE: url(../images/kobalos-logo.jpg); BACKGROUND-REPEAT: repeat-y;
+}
+
+.headerBg {
+	/* BACKGROUND-IMAGE: url(kobalos_banner.jpg); BACKGROUND-REPEAT: repeat-y */
+	BACKGROUND-IMAGE: url(../images/kobalos_banner1.gif); BACKGROUND-REPEAT: repeat-y;
+	width: 822px;
+	height: 228px;
+}
+.footerBg {
+	BACKGROUND-IMAGE: url(../images/footer-png2b.png); BACKGROUND-REPEAT: ;
+	FONT-SIZE: 10px; 
+	COLOR: lightsteelblue; 
+	padding-bottom: 6px;
+	FONT-FAMILY: tahoma, verdana, arial, sans-serif; 
+	FONT-WEIGHT: ;
+	TEXT-ALIGN: left;
+	height: 55px;
+	width: 822px;
+}
+
+.allBg
+{
+  background-color: #333333;
+  height: 855px;
+  width: 822px;
+}
+
+TD.mainContents {
+	BACKGROUND-IMAGE: url(../images/haste.jpg); BACKGROUND-REPEAT: repeat-y
+}
+
+TD.guildF{
+	FONT-SIZE: 40px; 
+	COLOR: lightsteelblue; 
+	padding-bottom: 0px;
+	padding-top: 20px;
+	FONT-FAMILY: tahoma, verdana, arial, sans-serif; 
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: center;
+}
+
+p.subHeaders { 
+	FONT-SIZE: 16; 
+	COLOR: lightsteelblue; 
+	padding-bottom: 0px;
+	FONT-FAMILY: tahoma, verdana, arial, sans-serif; 
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: justify
+}
+
+#buttons .imFormButton {font: 10px Tahoma; color:#000000; border: 1px solid #000000; background-color:#C0C0C0; margin: 3px 0 7px 0; }
+#buttons {padding: 0px; }
+
+/* Default body style */
+body {
+	font-family: sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: darkgray;
+/*	background-color:#fcfcfd;*/
+	text-align: justify;
+	margin: 0px;
+	background-color:#585959;
+	background-image: url(../images/hardwired_bak.gif);
+	background-repeat: ;
+	background-position: center top;
+}
+
+H4 {font-family: sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	color: red;
+	font-weight: bold;
+}
+
+
+/* default link styles */
+a {
+	text-decoration: none;
+	/*color: #990000;*/
+	color: lightslategray;
+	background-color: transparent;
+}
+
+/* hover changes color, no underline */
+a:hover {
+	color: lightsteelblue;
+	background-color: ;
+}
+
+/* default table styles */
+table {
+	padding: 0px; /* cellpadding=0 */
+	border: 0px; /* border=0 */
+	border-spacing: 0px; /* cellspacing=0 */
+}
+
+
+
+/* lists */
+ul {
+	list-style: square outside;
+	padding: 0px;
+	margin: 0px 0px 0px 4px;
+}
+
+/* nested list */
+ul ul {
+	list-style: square outside;
+	padding: 0px;
+	margin: 0px 0px 0px 14px;
+}
+
+/* list item */
+ul li {
+	padding: 0px;
+	margin: 8px 0px 6px 14px;
+}
+
+
+P.profileFont {
+	FONT-WEIGHT: normal; FONT-SIZE: 10px; COLOR: dimgray; FONT-FAMILY: sans-serif; TEXT-ALIGN: justify;
+}
+
+
