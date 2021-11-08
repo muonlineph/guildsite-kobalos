@@ -1,6 +1,6 @@
 ## guildsite-kobalos
 
-> This is a backup and archive of the **KoB/\Los** guild's website, as it was last seen on webs.com (freewebs.com) before it was deactivated. I'm uploading it in public for future references, and maybe get to update the site to use modern web design and layout techniques if time permits.  
+> This is a backup and archive of (Mobiusgames) Mu Philippine's **KoB/\Los** guild website, as it was last seen on webs.com (freewebs.com) before it was deactivated. I'm uploading it in public for future references, and maybe get to update the site to use modern web design and layout techniques if time permits.  
 >
 > **NOTE:** The original site uses static files and outdated HTML/JS approaches. Some functionality on various pages may not work on modern browsers.
 
@@ -15,6 +15,7 @@ https://github.com/muonlineph/guildsite-kobalos/public
 - [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Credits](#credits)
 
 ### Dependencies
 
@@ -53,6 +54,10 @@ The following dependecies are used for this project. Feel free to experiment usi
 
 4. Run the production static website (does not use live reload).  
 `npm run start`
+
+## Credits
+
+Many thanks to GM Tony for writing most of the site's content and for guild members' active participation in-game, on the forums and on-site.
 
 @weaponsforge  
 20211108
