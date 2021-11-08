@@ -1,40 +1,40 @@
 if (document.images) { 
 	tarrent_off= new Image(118,82); 
-	tarrent_off.src= '../chars/tarrent-off.jpg' ; 
+	tarrent_off.src= '../chars/tarrent-off.jpg';
 
 	tarrent_ovr= new Image(108,66); 
-	tarrent_ovr.src= '../chars/tarrent.GIF'; 
+	tarrent_ovr.src= '../chars/tarrent.gif';
 
 
         reiz_off= new Image(118,82); 
-	reiz_off.src= '../../chars/reiz-off.jpg' ; 
+	reiz_off.src= '../../chars/reiz-off.jpg';
 
 	reiz_ovr= new Image(108,66); 
-	reiz_ovr.src= '../../chars/reiz.GIF' ; 
+	reiz_ovr.src= '../../chars/reiz.gif';
 
 
 
         hellios_off= new Image(118,82); 
-	hellios_off.src= '../../chars/hellios-off.jpg' ; 
+	hellios_off.src= '../../chars/hellios-off.jpg';
 
 	hellios_ovr= new Image(108,66); 
-	hellios_ovr.src= '../../chars/hellios.GIF' ; 
+	hellios_ovr.src= '../../chars/hellios.gif';
 
 
  
         avatarr_off= new Image(118,82); 
-	avatarr_off.src= '../../chars/avatarr-off.jpg' ; 
+	avatarr_off.src= '../../chars/avatarr-off.jpg';
 
 	avatarr_ovr= new Image(108,66); 
-	avatarr_ovr.src= '../../chars/avatarr.GIF' ; 
+	avatarr_ovr.src= '../../chars/avatarr.gif';
 
 
 
         tarrant_off= new Image(118,82); 
-	tarrant_off.src= '../../chars/tarrant-off.jpg' ; 
+	tarrant_off.src= '../../chars/tarrant-off.jpg';
 
 	tarrant_ovr= new Image(108,66); 
-	tarrant_ovr.src= '../../chars/tarrant.GIF' ; 
+	tarrant_ovr.src= '../../chars/tarrant.gif';
 
 	
 
