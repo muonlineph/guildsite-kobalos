@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Countdown Redirect</title>
+<SCRIPT LANGUAGE="JavaScript">
+
+<!-- Begin
+var start=new Date();
+	start=Date.parse(start)/1000;
+	var counts=10;
+	function CountDown(){
+		var now=new Date();
+		now=Date.parse(now)/1000;
+		var x=parseInt(counts-(now-start),10);
+		if(document.form1){document.form1.clock.value = x;}
+		if(x>0){
+			timerID=setTimeout("CountDown()", 100)
+		}else{
+			location.href="http://javascript.internet.com"
+		}
+	}
+//  End -->
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+window.setTimeout('CountDown()',100);
+-->
+</script>
+
+
+</head>
+<body>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+<!-- Begin
+// Cache-busting LUBID bug.
+var ran = Math.round(Math.random() * 899999) + 100000;
+var lubid_string = "<img src=\"http://lubid.lycos.com/one.asp?site=members.tripod.lycos.com&ord=" + ran + "\" height=\"1\" width=\"1\">";
+document.write(lubid_string);
+//
+//  End -->
+</script>
+</center>
+<FORM NAME="form1">
+You are being redirected in 
+<INPUT TYPE="text" NAME="clock" SIZE="2" VALUE="10"> 
+seconds.
+</FORM>
+</center>
+
+
+</html>

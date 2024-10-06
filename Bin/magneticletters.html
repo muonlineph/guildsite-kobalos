@@ -1,0 +1,371 @@
+<html>
+<head>
+<title>Magnetic Letters</title>
+
+</head>
+<body>
+
+<SCRIPT>
+
+// Distributed by http://rainbow.arch.scriptmania.com
+
+var text=new Array()
+var textsplashcolors=new Array()
+
+// Place your messages below. Add as many as you like!
+text[0]="Welcome to Rainbow Arch."
+text[1]="Another great javascript for your site ..."
+text[2]="Magnetic Letters gives a great effect for webpages."
+text[3]="Entertain your visitors with this script ..."
+text[4]="Grab the code below!."
+
+// Change the letter colors here 
+textsplashcolors[0]="#FFFF00"
+textsplashcolors[1]="#FF0000"
+textsplashcolors[2]="#00FF00"
+textsplashcolors[3]="#00FFFF"
+textsplashcolors[4]="#FF00FF"
+textsplashcolors[5]="#FFAA00"
+textsplashcolors[6]="#0088FF"
+
+// Change the font
+var textfont="Arial"
+
+// Change the font-size for IE4x/5x/6x and NS6x (CSS-standard)
+var textfontsize=18
+
+// Change the font size for NS4x (HTML-standard)
+var textfontsizeHTML=4
+
+// Change the pause between the messages (seconds)
+var textpause=3
+
+// DO NOT EDIT BELOW THIS LINE
+
+// CREDITS:
+// Letter Magnet
+// By Urs Dudli and Peter Gehrig
+// Copyright (c) 2002 Peter Gehrig and Urs Dudli. All rights reserved.
+// Permission given to use the script provided that this notice remains as is.
+
+var textweight="bold"
+var textweightA="<b>"
+var textweightB="</b>"
+var textitalic="normal"
+var textitalicA=""
+var textitalicB=""
+var textalignabsolute="topleft"
+var letterwidth=new Array()
+var messagewidth=0
+var messageheight=0
+var i_colors=0
+var letterspace=Math.floor(textfontsize/1.3)
+var timer
+var i_text=0
+var textsplitted
+var i_textpath=0
+var endpause=1
+var endpausemilli=endpause*10
+var maxtextlength=0
+var i_endposition=0
+var windowwidth=0
+var windowheight=0
+var windowwidthfactor=1
+var windowheightfactor=1
+var i_span=0
+var startposmax_x=0
+var startposmax_y=0
+textpause*=1000
+var x_step=new Array()
+var y_step=new Array()
+var x_finalpos=new Array()
+var y_finalpos=0
+var max_loop=20
+var i_loop=0
+
+var ns4=document.layers?1:0
+var ns6=document.getElementById&&!document.all?1:0 
+var ie=document.all?1:0
+
+for (i=0;i<=text.length-1;i++) {
+	if (text[i].length>=maxtextlength) {maxtextlength=text[i].length}
+}
+for (i=0;i<=text.length-1;i++) {
+	text[i]=text[i]+" "
+}
+
+var xpos=new Array()
+for (i=0;i<=maxtextlength;i++) {
+	xpos[i]=5000
+}
+
+var ypos=new Array()
+for (i=0;i<=maxtextlength;i++) {
+	ypos[i]=5000
+}
+
+function randomizer(range) {		
+	return Math.floor(range*Math.random())
+}
+
+function getpagesize() {
+	if (ie) {
+		windowheight=parseInt(document.body.clientHeight)
+		windowwidth=parseInt(document.body.clientWidth)
+	}
+	if (ns4 || ns6) {
+		windowheight=parseInt(window.innerHeight)
+		windowwidth=parseInt(window.innerWidth)
+	}
+	startposmax_x=windowwidth-2*parseInt(textfontsize)
+	startposmax_y=windowheight-2*parseInt(textfontsize)
+
+	changecontent()
+}
+
+function changecontent() {
+		messagewidth=0
+		var textsa=text[i_text]
+		textsplitted=textsa.split("")
+		if (ie) {
+			for (i=0;i<=textsplitted.length-1;i++) {
+				var thisspan=eval("document.all.span"+i)
+    			thisspan.innerHTML="<span style='font-family:"+textfont+";font-size:"+textfontsize+";font-style:"+textitalic+";font-weight:"+textweight+";color:"+textsplashcolors[i_colors]+";text-align:center'>"+textsplitted[i]+"</span>"
+				i_colors++
+				if (i_colors>textsplashcolors.length-1) {i_colors=0}
+				letterwidth[i]=Math.round(thisspan.offsetWidth*1.2)
+				
+				if (letterwidth[i]==0) {letterwidth[i]=parseInt(textfontsize)}
+				messagewidth+=letterwidth[i]
+				messageheight=Math.round(document.all.span0.offsetHeight)
+			}
+		}
+		if (ns6) {
+			for (i=0;i<=textsplitted.length-1;i++) {
+				var thisspan=eval(document.getElementById('span'+i))
+    			thisspan.innerHTML="<span style='font-family:"+textfont+";font-size:"+textfontsize+";font-style:"+textitalic+";font-weight:"+textweight+";color:"+textsplashcolors[i_colors]+"'>"+textsplitted[i]+"</span>"
+				i_colors++
+				if (i_colors>textsplashcolors.length-1) {i_colors=0}
+				letterwidth[i]=Math.round(parseInt(thisspan.offsetWidth)*1.2)
+				if (letterwidth[i]==0) {letterwidth[i]=textfontsize}
+				messagewidth+=letterwidth[i]
+				messageheight=Math.round(document.getElementById('span0').offsetHeight)
+			}
+			
+		}
+		if (ns4) {
+			for (i=0; i<textsplitted.length-1; i++) {
+    			var thisspan=eval("document.span"+i+".document")
+    			thisspan.write("<p><font size="+textfontsizeHTML+" color="+textsplashcolors[i_colors]+" face="+textfont+">"+textitalicA+textweightA+textsplitted[i]+textweightB+textitalicB+"</font></p>")
+				thisspan.close()
+				letterwidth[i]=Math.round(thisspan.width*1.2)
+				if (letterwidth[i]==0) {letterwidth[i]=textfontsize}
+				messagewidth+=letterwidth[i]
+				messageheight=Math.round(document.span0.document.height)
+				thisspan.clear()
+				i_colors++
+				if (i_colors>textsplashcolors.length-1) {i_colors=0}
+    		}
+			for (i=0; i<textsplitted.length-1; i++) {
+    			var thisspan=eval("document.span"+i)
+    			thisspan.visibility="show"
+    		}
+		}
+		i_text++ 
+		if (i_text>=text.length) {i_text=0}
+		getfinalpos()
+}
+
+function getfinalpos() {
+	if (ie || ns6) {var padding_x=100}; if (ns4) {var padding_x=40};
+	if (ie || ns6) {var padding_y=80}; if (ns4) {var padding_y=40};
+	if (textalignabsolute=="middlecenter") {
+		x_finalpos[0]=(windowwidth-messagewidth)/2
+		y_finalpos=(windowheight-messageheight)/2
+	}
+	else if (textalignabsolute=="topleft") {
+		x_finalpos[0]=5
+		y_finalpos=0
+	}
+	else if (textalignabsolute=="topcenter") {
+		x_finalpos[0]=(windowwidth-messagewidth)/2
+		y_finalpos=0
+	}
+	else if (textalignabsolute=="topright") {
+		x_finalpos[0]=windowwidth-messagewidth
+		y_finalpos=0
+	}
+	else if (textalignabsolute=="bottomleft") {
+		x_finalpos[0]=5
+		y_finalpos=windowheight-messageheight
+	}
+	else if (textalignabsolute=="bottomcenter") {
+		x_finalpos[0]=(windowwidth-messagewidth)/2
+		y_finalpos=windowheight-messageheight
+	}
+	else if (textalignabsolute=="bottomright") {
+		x_finalpos[0]=windowwidth-messagewidth
+		y_finalpos=windowheight-messageheight
+	}
+	for (i=1;i<textsplitted.length-1;i++) {
+		x_finalpos[i]=x_finalpos[i-1]+letterwidth[i-1]
+	}
+	gotostartpos()
+}
+
+function gotostartpos() {
+	if (ie) {
+		for (i=0;i<textsplitted.length-1;i++) {
+			var thisspan=eval("document.all.span"+i+".style")
+			thisspan.posLeft=randomizer(startposmax_x)
+			thisspan.posTop=randomizer(startposmax_y)
+		}
+	}
+	if (ns4) {
+		for (i=0;i<textsplitted.length-1;i++) {
+			var thisspan=eval("document.span"+i)
+			thisspan.left=randomizer(startposmax_x)
+			thisspan.top=randomizer(startposmax_y)
+		}
+	}
+	if (ns6) {
+		for (i=0;i<textsplitted.length-1;i++) {
+			var thisspan=eval("document.getElementById('span'+i).style")
+			thisspan.left=randomizer(startposmax_x)
+			thisspan.top=randomizer(startposmax_y)
+		}
+	}
+	gotostandstillpos()
+}
+
+function gotostandstillpos() {
+	if (ie) {
+		if (i_loop<=max_loop-1) {
+			for (i=0;i<textsplitted.length-1;i++) {
+				var thisspan=eval("document.all.span"+i+".style")
+				x_step[i]=(x_finalpos[i]-thisspan.posLeft)/(max_loop-i_loop)
+				y_step[i]=(y_finalpos-thisspan.posTop)/(max_loop-i_loop)		
+				thisspan.posLeft+=x_step[i]
+				thisspan.posTop+=y_step[i]
+			}
+			i_loop++
+			var timer=setTimeout("gotostandstillpos()",20)
+		}
+		else {
+			i_loop=0
+			clearTimeout(timer)
+			timer=setTimeout("gotoendpos()",textpause)
+		}
+	}
+	if (ns4) {
+		if (i_loop<=max_loop-1) {
+			for (i=0;i<textsplitted.length-1;i++) {
+				var thisspan=eval("document.span"+i)
+				x_step[i]=(x_finalpos[i]-thisspan.left)/(max_loop-i_loop)
+				y_step[i]=(y_finalpos-thisspan.top)/(max_loop-i_loop)		
+				thisspan.left+=x_step[i]
+				thisspan.top+=y_step[i]
+			}
+			i_loop++
+			var timer=setTimeout("gotostandstillpos()",20)
+		}
+		else {
+			i_loop=0
+			clearTimeout(timer)
+			timer=setTimeout("gotoendpos()",textpause)
+		}
+	}
+	if (ns6) {
+		if (i_loop<=max_loop-1) {
+			for (i=0;i<textsplitted.length-1;i++) {
+				var thisspan=eval("document.getElementById('span'+i).style")
+				x_step[i]=(x_finalpos[i]-parseInt(thisspan.left))/(max_loop-i_loop)
+				y_step[i]=(y_finalpos-parseInt(thisspan.top))/(max_loop-i_loop)		
+				thisspan.left=parseInt(thisspan.left)+x_step[i]
+				thisspan.top=parseInt(thisspan.top)+y_step[i]
+			}
+			i_loop++
+			var timer=setTimeout("gotostandstillpos()",20)
+		}
+		else {
+			i_loop=0
+			clearTimeout(timer)
+			timer=setTimeout("gotoendpos()",textpause)
+		}
+	}
+}
+
+function gotoendpos() {
+	if (ie) {
+		if (i_loop<=textsplitted.length-1) {
+			var thisspan=eval("document.all.span"+i_loop+".style")
+			thisspan.posLeft=-1000
+			i_loop++
+			var timer=setTimeout("gotoendpos()",10)
+		}
+		else {
+			clearTimeout(timer)
+			i_loop=0
+			var timer=setTimeout("changecontent()",400)
+		}
+	}
+	if (ns4) {
+		if (i_loop<=textsplitted.length-1) {
+			var thisspan=eval("document.span"+i_loop)
+			thisspan.left=-1000
+			i_loop++
+			var timer=setTimeout("gotoendpos()",10)
+		}
+		else {
+			clearTimeout(timer)
+			i_loop=0
+			changecontent()
+		}
+	}
+	
+	if (ns6) {
+		if (i_loop<=textsplitted.length-1) {
+			var thisspan=eval("document.getElementById('span'+i_loop).style")
+			thisspan.left=-1000
+			i_loop++
+			var timer=setTimeout("gotoendpos()",10)
+		}
+		else {
+			clearTimeout(timer)
+			i_loop=0
+			changecontent()
+		}
+	}
+}
+
+if (ie) {
+	for (i=0;i<=maxtextlength;i++) {
+    	document.write("<span id='span"+i+"' style='position:absolute'>")
+		
+    	document.write("</span>")
+	}
+	window.onload=getpagesize
+}
+if (ns6) {
+	for (i=0;i<=maxtextlength;i++) {
+    	document.write("<span id='span"+i+"' style='position:absolute'>")
+		document.write(textsplitted)
+    	document.write("</span>")
+	}
+	window.onload=getpagesize
+}
+if (ns4) {
+	for (i=0;i<=maxtextlength;i++) {
+    	document.write("<layer name='span"+i+"' visibility=hide>")
+		document.write(textsplitted)
+    	document.write("</layer>")
+	}
+	window.onload=getpagesize
+}
+</script>
+
+<br><p align="left"><font face="arial" size="-2">Free scripts<br>provided by </font><br><font face="arial, helvetica" size="-2"><a href="http://rainbow.arch.scriptmania.com">Rainbow Arch</a></font></p>
+
+
+</body>
+</html>

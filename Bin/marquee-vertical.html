@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>Marquee-Vertical</title>
+
+
+</head>
+<body>
+
+<script language="javascript">
+/*******************************************
+Vertical Scroller (Marquee Replacement) v-1.3
+Brian Gosselin - http://scriptasylum.com
+
+Version notes:
+V-1.0: Initial release.
+V-1.1: Fixed bug in NS6 where page shrinks and grows as
+       content scrolls. You no longer have to specify
+       content height, the script does this for you.
+V-1.2: Fixed a bug in NS4 where scrolling content would
+       dictate the bottom boundary of box script.
+V-1.3: Added selectable support for pausing the scrolling
+       when box moused-over.
+*******************************************/
+
+//ENTER CONTENT TO SCROLL BELOW.
+var content='You <s>can</s>  "put" most any type of <b>HTML</b> <font color="red">in</font> <i>here</i>.<br><br>V-1.1: This script has been updated to fix a bug when used in Netscape 6.2. This bug caused the page to "grow" and "shrink" as the content scrolled in and out of view.<br><br>V-1.2: Fixed a bug in Netscape 4 which caused the scrolling content to dictate bottom script boundary.<br><br>Also, you no longer have to specify the scrolling content height, the script does this for you.<br><br>V-1.3: Added support for pausing the scrolling when box moused-over. This feature is selectable.';
+
+var boxheight=150;        // BACKGROUND BOX HEIGHT IN PIXELS.
+var boxwidth=300;         // BACKGROUND BOX WIDTH IN PIXELS.
+var boxcolor="#FFF6e9";   // BACKGROUND BOX COLOR.
+var speed=50;             // SPEED OF SCROLL IN MILLISECONDS (1 SECOND=1000 MILLISECONDS)..
+var pixelstep=1;          // PIXELS "STEPS" PER REPITITION.
+var godown=false;         // TOP TO BOTTOM=TRUE , BOTTOM TO TOP=FALSE
+var pauseOnmouseover=true; //SET TO "true" TO ENABLE PAUSE WHEN MOUSEOVER, "false" TO DISABLE IT.
+
+// DO NOT EDIT BEYOND THIS POINT
+
+var outer,inner,elementheight,ref,refX,refY;
+var w3c=(document.getElementById)?true:false;
+var ns4=(document.layers)?true:false;
+var ie4=(document.all && !w3c)?true:false;
+var ie5=(document.all && w3c)?true:false;
+var ns6=(w3c && navigator.appName.indexOf("Netscape")>=0)?true:false;
+var txt='';
+var goscroll=true;
+if(ns4){
+txt+='<table cellpadding=0 cellspacing=0 border=0 height='+boxheight+' width='+boxwidth+'><tr><td>';
+txt+='<ilayer name="ref" bgcolor="'+boxcolor+'" width='+boxwidth+' height='+boxheight+'></ilayer>';
+txt+='</td></tr></table>'
+txt+='<layer name="outer" bgcolor="'+boxcolor+'" visibility="hidden" width='+boxwidth+' height='+boxheight+' '+((pauseOnmouseover)? 'onmouseover="goscroll=false" onmouseout="goscroll=true"':'')+'>';
+txt+='<layer  name="inner"  width='+(boxwidth-4)+' height='+(boxheight-4)+' visibility="hidden" left="2" top="2" >'+content+'</layer>';
+txt+='</layer>';
+}else{
+txt+='<div id="ref" style="position:relative; width:'+boxwidth+'; height:'+boxheight+'; background-color:'+boxcolor+';"></div>';
+txt+='<div id="outer" style="position:absolute; width:'+boxwidth+'; height:'+boxheight+'; visibility:hidden; background-color:'+boxcolor+'; overflow:hidden"  '+((pauseOnmouseover)? 'onmouseover="goscroll=false" onmouseout="goscroll=true"':'')+'>';
+txt+='<div id="inner"  style="position:absolute; visibility:hidden; left:2px; top:2px; width:'+(boxwidth-4)+'; overflow:hidden; cursor:default;" '+((pauseOnmouseover)? 'onmouseover="goscroll=false" onmouseout="goscroll=true"':'')+'>'+content+'</div>';
+txt+='</div>';
+}
+document.write(txt);
+txt='';
+
+function getElHeight(el){
+if(ns4)return (el.document.height)? el.document.height : el.clip.bottom-el.clip.top;
+else if(ie4||ie5)return (el.style.height)? el.style.height : el.clientHeight;
+else return (el.style.height)? parseInt(el.style.height):parseInt(el.offsetHeight);
+}
+
+function getPageLeft(el){
+var x;
+if(ns4)return el.pageX;
+if(ie4||w3c){
+x = 0;
+while(el.offsetParent!=null){
+x+=el.offsetLeft;
+el=el.offsetParent;
+}
+x+=el.offsetLeft;
+return x;
+}}
+
+function getPageTop(el){
+var y;
+if(ns4)return el.pageY;
+if(ie4||w3c){
+y=0;
+while(el.offsetParent!=null){
+y+=el.offsetTop;
+el=el.offsetParent;
+}
+y+=el.offsetTop;
+return y;
+}}
+
+function scrollbox(){
+if(goscroll){
+if(ns4){
+inner.top+=(godown)? pixelstep: -pixelstep;
+if(godown){
+if(inner.top>boxheight)inner.top=-elementheight;
+}else{
+if(inner.top<2-elementheight)inner.top=boxheight+2;
+}}else{
+inner.style.top=parseInt(inner.style.top)+((godown)? pixelstep: -pixelstep)+'px';
+if(godown){
+if(parseInt(inner.style.top)>boxheight)inner.style.top=-elementheight+'px';
+}else{
+if(parseInt(inner.style.top)<2-elementheight)inner.style.top=boxheight+2+'px';
+}}}}
+
+window.onresize=function(){
+if(ns4)setTimeout('history.go(0)', 400);
+else{
+outer.style.left=getPageLeft(ref)+'px';
+outer.style.top=getPageTop(ref)+'px';
+}}
+
+window.onload=function(){
+outer=(ns4)?document.layers['outer']:(ie4)?document.all['outer']:document.getElementById('outer');
+inner=(ns4)?outer.document.layers['inner']:(ie4)?document.all['inner']:document.getElementById('inner');
+ref=(ns4)?document.layers['ref']:(ie4)?document.all['ref']:document.getElementById('ref');
+elementheight=getElHeight(inner);
+if(ns4){
+outer.moveTo(getPageLeft(ref),getPageTop(ref));
+outer.clip.width=boxwidth;
+outer.clip.height=boxheight;
+inner.top=(godown)? -elementheight : boxheight-2;
+inner.clip.width=boxwidth-4;
+inner.clip.height=elementheight;
+outer.visibility="show";
+inner.visibility="show";
+}else{
+outer.style.left=getPageLeft(ref)+'px';
+outer.style.top=getPageTop(ref)+'px';
+inner.style.top=((godown)? -elementheight : boxheight)+'px';
+inner.style.clip='rect(0px, '+(boxwidth-4)+'px, '+(elementheight)+'px, 0px)';
+outer.style.visibility="visible";
+inner.style.visibility="visible";
+}
+setInterval('scrollbox()',speed);
+}
+
+</script>
+<style type="text/css">
+
+body {
+background-color:white;
+font-size:10pt;
+font-family:sans-serif;
+color:#00436e;
+}
+
+</style>
+
+
+
+</html>
