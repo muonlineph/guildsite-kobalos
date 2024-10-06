@@ -4,9 +4,11 @@
 >
 > **NOTE:** The original site uses static files and outdated HTML/JS approaches. Some functionality on various pages may not work on modern browsers.
 
+![kobalos](assets/screenshot.png)
+
 ## Demo
 
-https://github.com/muonlineph/guildsite-kobalos/public
+https://github.com/muonlineph/guildsite-kobalos/
 
 
 ### Content
